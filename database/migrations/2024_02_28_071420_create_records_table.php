@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->json('data');
-            $table->boolean('access');
+            $table->boolean('access')->default(0);
             $table->timestamps();
 
         });
