@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::get('/records/{id}', [RecordController::class, 'findRecordById']);
+Route::get('/records/{id}', [RecordController::class, 'findRecordById'])->middleware('access.records');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
