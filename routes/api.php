@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/records/{id}', [RecordController::class, 'findRecordById'])->middleware('access.records');
 
+Route::post('/records/find', [RecordController::class, 'findRecordsByData']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
