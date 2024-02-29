@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from 'vue';
 
-const inputData = ref([{key: '', value: ''}]);
+const inputData = ref([{key: '', value: ''}, {key: '', value: ''}, {key: '', value: ''}]);
 const records = ref([]);
 const isLoading = ref(false);
 const message = ref('');
@@ -11,10 +11,10 @@ const handleSubmit = async () => {
     message.value = '';
     records.value = [];
 
-    const transformedInputData = inputData.value.map(item => ({ [item.key]: item.value }));
+    const transformedInputData = inputData.value.map(item => ({[item.key]: item.value}));
 
     try {
-        const response = await axios.post('api/records/find', { criteria: JSON.stringify(transformedInputData) }, {
+        const response = await axios.post('api/records/find', {criteria: JSON.stringify(transformedInputData)}, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -41,13 +41,12 @@ const handleSubmit = async () => {
     </div>
     <div class="container mx-auto p-4">
         <form class="space-y-4" @submit.prevent="handleSubmit">
-            <div v-for="(inputData, index) in inputData" :key="index" class="flex gap-2">
-                <input v-model="inputData.key" class="border p-2 w-1/3 rounded" placeholder="Ключ" type="text">
-                <input v-model="inputData.value" class="border p-2 w-2/3 rounded" placeholder="Значение" type="text">
+            <div v-for="obj in inputData" :key="obj.key" class="flex gap-2">
+                <input v-model.trim="obj.key" class="border p-2 w-1/3 rounded" placeholder="Ключ" type="text">
+                <input v-model="obj.value" class="border p-2 w-2/3 rounded" placeholder="Значение" type="text">
             </div>
             <button
                 v-if="!isLoading"
-                :class="{'opacity-50 cursor-not-allowed': isLoading}"
                 :disabled="isLoading"
                 class="bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 text-white py-2 px-4 rounded"
                 type="submit">Получить
