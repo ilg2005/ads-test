@@ -11,14 +11,17 @@ const handleSubmit = async () => {
     message.value = '';
     records.value = [];
 
-    const transformedInputData = inputData.value.map(item => ({[item.key]: item.value}));
+    const formData = new FormData();
+    inputData.value.forEach(item => {
+        formData.append(item.key, item.value);
+    });
 
     try {
-        const response = await axios.post('api/records/find', {criteria: JSON.stringify(transformedInputData)}, {
+        const response = await axios.post('api/records/find', formData, {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
-        })
+        });
         if (response.data.length) {
             records.value = response.data;
         } else {
@@ -42,8 +45,8 @@ const handleSubmit = async () => {
     <div class="container mx-auto p-4">
         <form class="space-y-4" @submit.prevent="handleSubmit">
             <div v-for="obj in inputData" :key="obj.key" class="flex gap-2">
-                <input v-model.trim="obj.key" class="border p-2 w-1/3 rounded" placeholder="Ключ" type="text">
-                <input v-model="obj.value" class="border p-2 w-2/3 rounded" placeholder="Значение" type="text">
+                <input v-model.lazy.trim="obj.key" class="border p-2 w-1/3 rounded" placeholder="Ключ" type="text">
+                <input v-model.lazy.trim="obj.value" class="border p-2 w-2/3 rounded" placeholder="Значение" type="text">
             </div>
             <button
                 v-if="!isLoading"
@@ -60,16 +63,16 @@ const handleSubmit = async () => {
             <table class="border-collapse border border-slate-400 w-full">
                 <thead>
                 <tr>
-                    <th class="border border-slate-300 w-1/6">Id</th>
-                    <th class="border border-slate-300 w-1/3">Key</th>
-                    <th class="border border-slate-300 w-1/2">Value</th>
+                    <th class="border border-slate-300 w-1/8">Id</th>
+                    <th class="border border-slate-300 w-3/4">Data</th>
+                    <th class="border border-slate-300">Access</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="record in records" :key="record.id">
-                    <td class="border border-slate-300 p-2 w-1/6">{{ record.id }}</td>
-                    <td class="border border-slate-300 p-2 w-1/3">{{ record.key }}</td>
-                    <td class="border border-slate-300 p-2 w-1/2">{{ record.value }}</td>
+                <tr v-for="record in records" :key="record.id" class="text-center">
+                    <td class="border border-slate-300 p-2 w-1/8">{{ record.id }}</td>
+                    <td class="border border-slate-300 p-2 w-3/4">{{ record.data }}</td>
+                    <td class="border border-slate-300 p-2">{{ record.access }}</td>
 
                 </tr>
                 </tbody>
