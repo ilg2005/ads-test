@@ -25,6 +25,7 @@ class RecordController extends Controller
     public function findRecordsByData(Request $request): JsonResponse
     {
         $criteria = $request->all();
+        var_dump($criteria);
 
         $records = Record::findByData($criteria);
 

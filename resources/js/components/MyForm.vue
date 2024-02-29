@@ -11,13 +11,10 @@ const handleSubmit = async () => {
     message.value = '';
     records.value = [];
 
-    const transformedInputData = inputData.value.reduce((acc, item) => {
-        acc[item.key] = item.value;
-        return acc;
-    }, {});
+    const transformedInputData = inputData.value.map(item => ({ [item.key]: item.value }));
 
     try {
-        const response = await axios.post('api/records/find', { inputData: JSON.stringify(transformedInputData) }, {
+        const response = await axios.post('api/records/find', { criteria: JSON.stringify(transformedInputData) }, {
             headers: {
                 'Content-Type': 'application/json',
             },
