@@ -1,14 +1,15 @@
 import './bootstrap';
+import axios from "axios";
 import {createApp} from 'vue/dist/vue.esm-bundler.js';
-import HelloVue from './components/HelloVue.vue';
+import MyForm from './components/MyForm.vue';
 
 const app = createApp({
     components: {
-        'hello-vue': HelloVue,
+        MyForm,
     }
 });
 
-app.mount('#app');
+app.use(axios).mount('#app');
 
 import Alpine from 'alpinejs';
 
