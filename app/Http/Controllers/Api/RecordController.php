@@ -24,11 +24,13 @@ class RecordController extends Controller
 
     public function findRecordsByData(Request $request): JsonResponse
     {
-        $criteria = $request->input('criteria', []);
+        $criteria = $request->all();
+
+        var_dump($criteria);
 
         $records = Record::findByData($criteria);
 
-        if (!count($records)) {
+        if (count($records) === 0) {
             return response()->json(['message' => 'Records not found'], 404);
         }
 
