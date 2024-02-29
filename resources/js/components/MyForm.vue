@@ -60,14 +60,17 @@ const handleSubmit = async () => {
             <table class="border-collapse border border-slate-400 w-full">
                 <thead>
                 <tr>
-                    <th class="border border-slate-300">Key</th>
-                    <th class="border border-slate-300">Value</th>
+                    <th class="border border-slate-300 w-1/6">Id</th>
+                    <th class="border border-slate-300 w-1/3">Key</th>
+                    <th class="border border-slate-300 w-1/2">Value</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(record, index) in records" :key="index">
-                    <td class="border border-slate-300 p-2">{{ record.key }}</td>
-                    <td class="border border-slate-300 p-2">{{ record.value }}</td>
+                <tr v-for="record in records" :key="record.id">
+                    <td class="border border-slate-300 p-2 w-1/6">{{ record.id }}</td>
+                    <td class="border border-slate-300 p-2 w-1/3">{{ record.key }}</td>
+                    <td class="border border-slate-300 p-2 w-1/2">{{ record.value }}</td>
+
                 </tr>
                 </tbody>
             </table>
