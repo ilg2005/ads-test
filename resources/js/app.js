@@ -1,5 +1,4 @@
 import './bootstrap';
-import axios from "axios";
 import {createApp} from 'vue/dist/vue.esm-bundler.js';
 import MyForm from './components/MyForm.vue';
 
@@ -9,7 +8,7 @@ const app = createApp({
     }
 });
 
-app.use(axios).mount('#app');
+app.mount('#app');
 
 import Alpine from 'alpinejs';
 
