@@ -3,11 +3,11 @@ import {ref} from 'vue';
 
 const inputData = ref([{key: '', value: ''}]);
 const records = ref([]);
-const loading = ref(false);
+const isLoading = ref(false);
 const message = ref('');
 
 const handleSubmit = async () => {
-    loading.value = true;
+    isLoading.value = true;
     message.value = '';
     records.value = [];
 
@@ -28,7 +28,7 @@ const handleSubmit = async () => {
         message.value = 'Произошла ошибка.';
         console.error(error);
     } finally {
-        loading.value = false;
+        isLoading.value = false;
     }
 };
 </script>
@@ -45,10 +45,16 @@ const handleSubmit = async () => {
                 <input v-model="inputData.key" class="border p-2 w-1/3 rounded" placeholder="Ключ" type="text">
                 <input v-model="inputData.value" class="border p-2 w-2/3 rounded" placeholder="Значение" type="text">
             </div>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Получить</button>
+            <button
+                v-if="!isLoading"
+                :class="{'opacity-50 cursor-not-allowed': isLoading}"
+                :disabled="isLoading"
+                class="bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 text-white py-2 px-4 rounded"
+                type="submit">Получить
+            </button>
         </form>
 
-        <div v-if="loading" class="mt-4">Loading...</div>
+        <div v-if="isLoading" class="mt-4">Загружается...</div>
         <div v-if="message" class="text-red-600 mt-4">{{ message }}</div>
 
         <div v-if="records.length" class="mt-4">
