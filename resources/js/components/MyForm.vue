@@ -12,7 +12,7 @@ const handleSubmit = async () => {
     records.value = [];
 
     try {
-        const response = await axios.post('api/records/find', { inputs: JSON.stringify(inputData.value) }, {
+        const response = await axios.post('api/records/find', { inputData: JSON.stringify(inputData.value) }, {
             headers: {
                 'Content-Type': 'application/json',
             },
