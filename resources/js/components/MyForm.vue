@@ -35,9 +35,9 @@ const handleSubmit = async () => {
 
 <template>
     <div class="text-center text-gray-500">
-        <h1 class="text-5xl font-bold mb-6">Тестовое задание на должность <br> «Fullstack
+        <h1 class="text-3xl md:text-5xl font-bold mb-6">Тестовое задание на должность <br> «Fullstack
             разработчик (Laravel+Vue.JS)»</h1>
-        <h2 class="text-3xl">Получение записей по ключу и значению</h2>
+        <h2 class="text-xl md:text-3xl">Получение записей по ключу и значению</h2>
     </div>
     <div class="container mx-auto p-4">
         <form class="space-y-4" @submit.prevent="handleSubmit">
