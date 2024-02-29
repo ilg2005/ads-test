@@ -10,7 +10,7 @@ class Record extends Model
     {
         return self::where(function ($query) use ($criteria) {
             foreach ($criteria as $key => $value) {
-                $query->whereJsonContains('data->'.$key, $value);
+                $query->whereJsonContains('data->'.$key, $value, 'or');
             }
         })->get();
     }

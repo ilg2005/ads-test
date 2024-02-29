@@ -26,8 +26,6 @@ class RecordController extends Controller
     {
         $criteria = $request->all();
 
-        var_dump($criteria);
-
         $records = Record::findByData($criteria);
 
         if (count($records) === 0) {
