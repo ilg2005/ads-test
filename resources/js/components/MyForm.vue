@@ -22,10 +22,10 @@ const handleSubmit = async () => {
                 'Content-Type': 'multipart/form-data',
             },
         });
-        if (response.data.length) {
-            records.value = response.data;
-        } else {
+        if (response.data.message && response.data.message === 'No match') {
             message.value = 'Записи не найдены.';
+        } else if (response.data.length) {
+            records.value = response.data;
         }
     } catch (error) {
         message.value = 'Произошла ошибка.';

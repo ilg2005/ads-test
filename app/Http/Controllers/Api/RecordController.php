@@ -29,7 +29,7 @@ class RecordController extends Controller
         $records = Record::findByData($criteria);
 
         if (count($records) === 0) {
-            return response()->json(['message' => 'Records not found'], 404);
+            return response()->json(['message' => 'No match']);
         }
 
         return response()->json($records);
